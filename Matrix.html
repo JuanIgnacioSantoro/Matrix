@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix</title>
+</head>
+<body>
+    <canvas width="1920" height="1080" id="lienzo" />
+</body>
+<script>
+    const canvas = document.getElementById('lienzo');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = document.body.offsetWidth;
+    canvas.height = document.body.offsetHeight;
+
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, w, h);
+
+    const cols = Math.floor(w / 20) + 1;
+    const posicion_y = Array(cols).fill(0);
+
+    function matrix () {
+        ctx.fillStyle = '#0001';
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.fillStyle = '#0f0';
+        ctx.font = '15pt arial';
+
+        posicion_y.forEach((y, ind) => {
+            const text = String.fromCharCode(Math.random() * 255);
+            const x = ind * 20;
+            ctx.fillText(text, x, y);
+            if (y > 100 + Math.random() * 10000) {
+                posicion_y[ind] = 0;
+            }
+            else {
+                posicion_y[ind] = y + 20;
+            }
+        });
+    };
+    setInterval(matrix, 50);
+</script>
+</html>
